@@ -1,4 +1,3 @@
-
 function openForm(service) {
     document.getElementById("service").value = service;
     document.getElementById("appointmentModal").style.display = "flex";
@@ -80,33 +79,20 @@ function displayAppointments() {
     const container = document.getElementById("appointments");
     container.innerHTML = "";
     if (appointments.length > 0) {
-        const table = document.createElement("table");
-        table.innerHTML = `<tr><th>Name</th><th>Service</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr>`;
+        let content = `<table>
+            <tr><th>Name</th><th>Service</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr>`;
         appointments.forEach((appointment, index) => {
-            const row = table.insertRow();
-            row.insertCell(0).textContent = appointment.name;
-            row.insertCell(1).textContent = appointment.service;
-            row.insertCell(2).textContent = appointment.dateTime;
-            row.insertCell(3).textContent = appointment.status;
-            const actionsCell = row.insertCell(4);
-            actionsCell.innerHTML = `<button onclick="rescheduleAppointment(${index})">Reschedule</button>
-                                              <button onclick="cancelAppointment(${index})">Cancel</button>
-                                              <button onclick="updateStatus(${index}, 'Confirmed')">Confirm</button>
-                                              <button onclick="updateStatus(${index}, 'Cancelled')">Cancel</button>`;
+            content += `
+            <tr>
+                <td>${appointment.name}</td>
+                <td>${appointment.service}</td>
+                <td>${appointment.dateTime}</td>
+                <td>${appointment.status}</td>
+                <td><button onclick="cancelAppointment(${index})">Cancel</button></td>
+            </tr>`;
         });
-        container.appendChild(table);
-    }
-}
-
-function rescheduleAppointment(index) {
-    const appointments = JSON.parse(localStorage.getItem("appointments"));
-    const newDateTime = prompt("Enter new date and time (YYYY-MM-DDTHH:MM):", appointments[index].dateTime);
-    if (newDateTime && new Date(newDateTime) > new Date()) {
-        appointments[index].dateTime = newDateTime;
-        localStorage.setItem("appointments", JSON.stringify(appointments));
-        displayAppointments();
-    } else {
-        alert("Invalid date and time.");
+        content += `</table>`;
+        container.innerHTML = content;
     }
 }
 
@@ -117,13 +103,6 @@ function cancelAppointment(index) {
         localStorage.setItem("appointments", JSON.stringify(appointments));
         displayAppointments();
     }
-}
-
-function updateStatus(index, status) {
-    const appointments = JSON.parse(localStorage.getItem("appointments"));
-    appointments[index].status = status;
-    localStorage.setItem("appointments", JSON.stringify(appointments));
-    displayAppointments();
 }
 
 window.onload = displayAppointments;

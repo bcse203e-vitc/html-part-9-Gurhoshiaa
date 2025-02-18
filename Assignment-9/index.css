@@ -5,8 +5,15 @@ body {
     padding: 0;
 }
 
+.header {
+    background-color: #a1c8f8;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 20px;
     background: #fff;
@@ -14,8 +21,23 @@ body {
     border-radius: 5px;
 }
 
-.service {
+.services {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
     margin-bottom: 20px;
+}
+
+.service {
+    background: #e7e7e7;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1;
+}
+
+.service h2 {
+    margin: 0 0 10px;
 }
 
 .modal {
@@ -36,15 +58,31 @@ body {
     border-radius: 5px;
     max-width: 400px;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.modal-content label {
+    grid-column: 1 / 3;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea,
+.modal-content button {
+    grid-column: 1 / 3;
 }
 
 .close {
-    float: right;
+    grid-column: 1 / 3;
+    text-align: right;
     cursor: pointer;
 }
 
 .error {
     color: red;
+    grid-column: 1 / 3;
 }
 
 .hidden {
@@ -64,16 +102,16 @@ td {
 }
 
 th {
-    background-color: #bee0f0;
+    background-color: #a1c8f8;
     color: white;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f275;
+    background-color: #f2f2f2;
 }
 
 button {
-    background-color: #bee0f0;
+    background-color: #a1c8f8;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -85,5 +123,5 @@ button {
 }
 
 button:hover {
-    background-color: #bee0f0;
+    background-color: #a1c8f8;
 }
